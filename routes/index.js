@@ -19,7 +19,7 @@ router.use("/signup", signupRoute);
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
     router.use(function(req, res) {
-      res.sendFile(path.join(__dirname, "client/build/index.html"));
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 
     // app.use(express.static(path.join(__dirname, 'client/build')));
