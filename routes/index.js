@@ -3,6 +3,7 @@ const router = require("express").Router();
 const apiRoutes = require("./api");
 const signinRoute = require("./auth/signin");
 const signupRoute = require("./auth/signup");
+const app = express();
 
 // API Routes
 router.use("/api", apiRoutes);
@@ -16,10 +17,10 @@ router.use("/signup", signupRoute);
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
-    // app.use(express.static(path.join(__dirname, 'client/build')));
+    app.use(express.static(path.join(__dirname, 'client/build')));
         
     // Handle React routing, return all requests to React app
-    router.get('*', function(req, res) {
+    app.get('*', function(req, res) {
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 }
