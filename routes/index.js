@@ -16,7 +16,7 @@ router.use("/signup", signupRoute);
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
-    router.use(express.static(path.join(__dirname, 'client/build')));
+    router.use(path.join(__dirname, 'client/build'));
         
     // Handle React routing, return all requests to React app
     router.get('*', function(req, res) {
