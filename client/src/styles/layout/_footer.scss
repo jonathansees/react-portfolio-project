@@ -1,0 +1,122 @@
+.footer {
+    position: fixed;
+    background-color: white;
+    height: $footer-height;
+    width: 100vw;
+    z-index: 10;
+    
+    bottom: -($footer-height - $footer-search-bar-height);
+    transition: all $footer-transition-speed ease-out;
+  
+    &--open{
+      bottom: 0;
+    }
+  
+    .search {
+      padding: 0 $footer-content-padding;
+      
+      font-size: 1.4rem;
+      height: $footer-search-bar-height;
+      background-color: white;
+      border-bottom: $color-grey-light-2;
+      
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    
+      width: 100%;
+  
+      .flip-up {
+        -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+  
+        transition: all $footer-transition-speed ease-out;
+      }
+      
+      .flip-down {
+        -moz-transform: scaleY(1);
+        -o-transform: scaleY(1);
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        
+        transition: all $footer-transition-speed ease-out;
+      }
+    }
+    
+    .filter {
+      height: $footer-filter-height;
+      width: 100vw;
+      padding: $footer-content-padding;
+      
+      &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
+        height: $footer-filter-content-height;
+        background-image: linear-gradient(to right bottom, rgba(136, 213, 111, 0.0), rgba(40, 180, 131, 0.0)), $backgroundRestaurantCover;
+        background-size: cover;
+        background-position: center;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%)
+      }
+    }
+  }
+  
+  .img__btn--test {
+    margin-right: $footer-content-padding;
+    overflow: hidden;
+    position: relative;
+    width: 150px;
+    white-space: nowrap;
+    // display: inline;
+    height: 36px;
+    margin: 0 auto;
+    background: transparent;
+    color: black;
+    // text-transform: uppercase;
+    font-size: 15px;
+    cursor: pointer;
+    
+    &:after {
+      content: '';
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  
+    span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      transition: all $footer-transition-speed ease-out;
+      
+      &.m--in--test {
+        transform: translateY(36px*-2);
+        opacity: 0;
+        
+        &.open{
+            transform: translateY(0);
+            opacity: 100;
+        }
+      }
+      
+      &.m--up--test {
+        opacity: 100;
+        
+        &.open {
+          opacity: 0;
+          transform: translateY(36px*2);
+        }
+      }
+    }
+  }

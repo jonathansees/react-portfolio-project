@@ -1,0 +1,71 @@
+//// COLOR SCHEME ////
+$color-primary: #eb2f64;
+$color-primary-light: #FF3366;
+$color-primary-dark: #BA2650;
+
+$color-grey-light-1: #faf9f9;
+$color-grey-light-2: #f4f2f2;
+$color-grey-light-3: #f0eeee;
+$color-grey-light-4: #ccc;
+
+$color-grey-dark-1: #333;
+$color-grey-dark-2: #777;
+$color-grey-dark-3: #999;
+
+$primaryColor: #4279a3;
+$primaryGreen: #A5B076;
+$primaryBlue: #B9D3C2;
+$primaryLightOrange: #E9BC62;
+$PrimaryDarkOrange: #e98d58;
+$primaryDark: #545F66;
+$primaryLight: #EBE3CD;
+
+//// FOOTER ////
+$footer-height: 100vh;
+$footer-search-bar-height: 10vh;
+$footer-filter-height: ($footer-height - $footer-search-bar-height);
+$footer-filter-content-height: ($footer-filter-height - 10vh);
+$footer-content-padding: 5vh;
+$footer-transition-speed: 1.2s;
+
+//// INPUTS ////
+$inputBorderRadius: 5px;
+$inputWidth: 20vw;
+$inputHeight: 6vh;
+$inputBoxWidth: $inputWidth;
+$inputWidthLarge: 33vw;
+$inputHeightLarge: 8vh;
+$checkBoxWidth: $inputBoxWidth;
+$inputBoxWidthLarge: $inputWidthLarge;
+// $inputBoxHeightLarge: 
+$searchBarFromTop: 40vh;
+$searchBarFromLeft: (100vw - ((2*$inputWidthLarge))) / 2;
+$filterFromTop: $searchBarFromTop - ($footer-search-bar-height + $footer-content-padding) + $inputHeightLarge + 5vh;
+
+$loaderHeight: $inputHeight / 2;
+
+//// SIGN IN ////
+$shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+
+$containerHeight: 90vh;
+$searchHeight: 8vh;
+$filterHeight: $containerHeight - $searchHeight;
+$fromTopDistance: 100vh - $searchHeight;
+
+$contW: 80vw;
+$imgW: 30vw;
+$formW: $contW - $imgW;
+$switchAT: 1.2s;
+
+$inputW: 21vw;
+$btnH: 36px;
+
+$diffRatio: ($contW - $imgW) / $contW;
+
+$backgroundRestaurantCover: url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80');
+//$backgroundRestaurantSignIn: url('https://images.unsplash.com/photo-1521394573970-cdcef757fddd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3146&q=80');
+//$backgroundRestaurantSignIn: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3134&q=80');
+
+$backgroundRestaurantSignIn: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3134&q=80');
+
+//$backgroundRestaurantSignIn: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3134&q=80');

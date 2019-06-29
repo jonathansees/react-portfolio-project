@@ -1,0 +1,33 @@
+@import './abstracts/animations';
+@import './abstracts/functions';
+@import './abstracts/mixins';
+@import './abstracts/variables';
+
+@import './base/base';
+@import './base/typography';
+
+@import './components/button';
+@import './components/input';
+@import './components/loader';
+@import './components/map';
+@import './components/modal';
+@import './components/restaurantCard';
+@import './components/sidebar';
+@import './components/signin';
+
+@import './layout/content';
+@import './layout/footer';
+@import './layout/header';
+
+// @media (min-width: 600px) {
+//     .modal {
+//         width: 500px;
+//         left: calc(50% - 250px);
+//     }
+// }
+  
+// @mixin signUpActive {
+//     .cont.s--signup & {
+//         @content;
+//     }
+// }
