@@ -99,4 +99,8 @@
     width: 2.25rem;
     fill: $color-grey-dark-2;
   }
+
+  &__user-name.hidden {
+    visibility: hidden;
+  }
 }

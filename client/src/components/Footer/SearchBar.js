@@ -24,9 +24,23 @@ class SearchBar extends React.Component {
             searchLocation: formProps.searchLocation,
             searchOpen: formProps.searchOpen
         }, () => {
-            console.log(this.state);
             this.props.getRestaurants(this.state);
         });
+    }
+
+    renderMagnifyingGlass() {
+      if (!this.props.showFilter && !this.props.restaurants[0]) {
+        return (
+          <div className="loader">
+            <div className="dot1"></div>
+            <div className="dot2"></div>
+          </div>
+        )
+      }
+
+      return (
+        <MagnifyingGlass fill="white" className="icon" />
+      )
     }
   
     render() {
@@ -59,12 +73,9 @@ class SearchBar extends React.Component {
                 />
                   <span className="input__label input__label__text">Location</span>
                   <span className="input__highlight"></span>
+                  
                   <div className="input__btn" onClick={ handleSubmit(this.onSubmit) }>
-                    <MagnifyingGlass fill="white" className="icon" />
-                    {/* <div className="loader">
-                      <div className="dot1"></div>
-                      <div className="dot2"></div>
-                    </div> */}
+                    { this.renderMagnifyingGlass() }
                   </div>
               </div>
             </form>
@@ -72,9 +83,15 @@ class SearchBar extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+  return {
+    restaurants: Object.values(state.restaurants)
+  };
+};
+
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     actions
   ),
   reduxForm(

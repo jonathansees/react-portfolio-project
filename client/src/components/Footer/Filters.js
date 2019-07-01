@@ -16,9 +16,9 @@ class Filters extends React.Component {
     onSubmit = formProps => {
         // this.props.getRestaurants(formProps);
 
-        if (this.props.showFilter) {
-          this.props.openFilter()
-        }
+        // if (this.props.showFilter) {
+        //   this.props.openFilter()
+        // }
 
         this.setState({
             searchTerm: formProps.searchTerm,

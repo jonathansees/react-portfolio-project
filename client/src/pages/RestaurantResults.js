@@ -9,7 +9,6 @@ class RestaurantResults extends Component {
   }
 
   setSelectedMarker = restaurantId => {
-    console.log(restaurantId)
     this.setState({
       selectedMarker: restaurantId
     });

@@ -38,19 +38,18 @@ class Footer extends Component {
   render() {
     return (
       <>
-      <div className={ this.state.showFilter ? 'footer footer--open' : 'footer' }>
+      <div className={ this.state.showFilter || !this.props.restaurants[0] ? 'footer footer--open' : 'footer' }>
         <div className="search">
           <Yelp className="logo" size="20" />
 
           <nav 
            
            className="user-nav">
-            <span className="user-nav__user-name" onClick={ this.openFilter }>
-              {/* <Chevron className={ this.state.showFilter ? 'user-nav__icon flip-up' : 'user-nav__icon flip-down' } /> */}
+            <span className={ this.props.restaurants[0] ? 'user-nav__user-name' : 'user-nav__user-name hidden' } onClick={ this.openFilter }>
               <div className="img__btn--test">
-                <span className={ this.state.showFilter ? 'm--up--test open' : 'm--up--test' }><ChevronUp />More Filter Options</span>
-                <span className={ this.state.showFilter ? 'm--in--test open' : 'm--in--test' }><ChevronDown />Less Filter Options</span>
-              </div>
+              <span className={ this.state.showFilter ? 'm--up--test open' : 'm--up--test' }><ChevronUp />More Filter Options</span>
+              <span className={ this.state.showFilter ? 'm--in--test open' : 'm--in--test' }><ChevronDown />Less Filter Options</span>
+            </div>
             </span>
             <span className="user-nav__user-name" onClick={this.openSigninModal}>
               {/* <Chevron className={ this.state.showFilter ? 'user-nav__icon flip-up' : 'user-nav__icon flip-down' } /> */}
@@ -70,23 +69,25 @@ class Footer extends Component {
       </div>
       
       <Modal
-      show={this.state.showModal}
-      modalClosed={this.closeSigninModal}
-    >
-      <div className={ this.state.signup ? 'sign-in-container s--signup' : 'sign-in-container' }>
-        <Signin />
-        <SigninSubContent signInHandler={this.signInHandler}>
-          <Signup />
-        </SigninSubContent>
-      </div>
-    </Modal>
+        show={this.state.showModal}
+        modalClosed={this.closeSigninModal}
+      >
+        <div className={ this.state.signup ? 'sign-in-container s--signup' : 'sign-in-container' }>
+          <Signin />
+          <SigninSubContent signInHandler={this.signInHandler}>
+            <Signup />
+          </SigninSubContent>
+        </div>
+      </Modal>
     </>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated }
+  return { 
+    restaurants: Object.values(state.restaurants),
+    authenticated: state.auth.authenticated }
 }
 
 export default connect(mapStateToProps)(Footer);
