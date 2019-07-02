@@ -3,26 +3,14 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react';
 
-function createMapOptions(maps) {
-  // next props are exposed at maps
-  // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
-  // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
-  // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
-  // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
-  // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
-  return {
-    zoomControlOptions: {
-      position: maps.ControlPosition.RIGHT_CENTER
-    }
-  };
-}
-
 class GoogleMapsContainer extends React.Component {
     state = {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
     };
+
+    bounds = new this.props.google.maps.LatLngBounds();
 
     pinSymbol = (color, scale) => {
         return {
@@ -36,15 +24,39 @@ class GoogleMapsContainer extends React.Component {
     }
 
     onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
+      this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
+      });
+
+    renderBounds() {
+      var bounds = new this.props.google.maps.LatLngBounds();
+
+      this.props.restaurants[0].businesses.map(restaurant =>{
+        bounds.extend({ lat: restaurant.coordinates.latitude, lng: restaurant.coordinates.longitude })
+      })
+
+      let longNewLeftBound = ((bounds.ia.j - bounds.ia.l)/.56);
+      bounds.ia.j += longNewLeftBound;
+
+      return bounds;
+    }
+
+    renderCenter() {
+      var center = {
+        lat: this.props.restaurants[0].region.center.latitude, 
+        lng: this.props.restaurants[0].region.center.longitude
+      }
+
+      return center
+    }
     
     renderMarkers() {
         return this.props.restaurants[0].businesses.map(restaurant => {
+            this.bounds.extend({ lat: restaurant.coordinates.latitude, lng:restaurant.coordinates.longitude })
             return (
+              
                 <Marker
                     onClick = { this.onMarkerClick }
                     name = { restaurant.name }
@@ -70,71 +82,15 @@ class GoogleMapsContainer extends React.Component {
               <div></div>
             )
         } else {
-          // var bounds = new this.props.google.maps.LatLngBounds();
-          
-          // this.props.restaurants[0].businesses.map(restaurant =>{
-          //   // console.log(point);
-          //   bounds.extend({ lat: restaurant.coordinates.latitude, lng: restaurant.coordinates.longitude });
-          // })
-
-          const getMapBounds = (map, maps) => {
-            const bounds = new maps.LatLngBounds();
-          
-            this.props.restaurants[0].businesses.map(restaurant =>{
-              bounds.extend(new maps.LatLng(
-                restaurant.coordinates.latitude,
-                restaurant.coordinates.longitude,
-              ));
-            });
-            return bounds;
-          };
-          
-          // Re-center map when resizing the window
-          const bindResizeListener = (map, maps, bounds) => {
-            maps.event.addDomListenerOnce(map, 'idle', () => {
-              maps.event.addDomListener(window, 'resize', () => {
-                map.fitBounds(bounds);
-              });
-            });
-          };
-          
-          // Fit map to its bounds after the api is loaded
-          const apiIsLoaded = (map, maps) => {
-            // Get bounds by our places
-            const bounds = getMapBounds(map, maps);
-            // Fit map to bounds
-            map.fitBounds(bounds);
-            // Bind the resize listener
-            bindResizeListener(map, maps, bounds);
-          };
-
-          // console.log(bounds)
-          
-          // for (var i = 0; i < points.length; i++) {
-          //   bounds.extend(points[i]);
-          // }
-            console.log(this.props.restaurants[0])
+            this.renderMarkers()
             return ( 
                 <div className="map">
                     <Map
-                        // xs = { 12 }
                         google = { this.props.google }
-                        defaultZoom = { 10 }
-                        defaultCenter = {{ 
-                            lat: this.props.restaurants[0].region.center.latitude, 
-                            lng: this.props.restaurants[0].region.center.longitude
-                        }}
-                        // setCenter = { 
-                        //   bounds.getCenter()
-                        // }
-                        // fitBounds = { bounds }
-                        // bounds = { bounds }
+                        initialCenter = { this.renderCenter() }
+                        bounds = { this.renderBounds() }
                         disableDefaultUI = { true }
                         zoomControl = { true }
-                        options = { createMapOptions(this.props.google.maps) }
-                        // onGoogleApiLoaded={ this.onGoogleApiLoaded }
-                        yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps}) => apiIsLoaded(map, maps)}
                         styles = {[
                             {
                               "elementType": "geometry",
